@@ -1,6 +1,11 @@
-.post-list {
-  padding: 10px;
+.list {
   line-height: 24px;
   max-width: 640px;
   margin: 0 auto;
+}
+
+.list-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  margin: 0 10px;
 }
