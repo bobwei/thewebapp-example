@@ -2,6 +2,7 @@ import React from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
 export default class PostEditor extends React.Component {
+
   constructor(props, context) {
     super(props, context);
     this.state = {

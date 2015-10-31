@@ -3,35 +3,26 @@ require('bootstrap/dist/css/bootstrap.css');
 require('styles/App.scss');
 
 import React from 'react';
+import { connect } from 'react-redux';
+
+import * as postListActions from '../actions/postList';
 
 import PostList from './PostList';
 import PostEditor from './PostEditor';
 
 class AppComponent extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      postList: [{
-        text: '賴清德拒赴議會　公懲會申誡處分'
-      }, {
-        text: '新北欠北市補貼款8千萬 柯P：再不還，就告他！'
-      }]
-    };
-  }
 
   onSave(text) {
-    let postList = this.state.postList.slice();
-    postList.unshift({
-      text: text
-    });
-    this.setState({ postList: postList });
+    const { dispatch } = this.props;
+    dispatch(postListActions.addPost(text));
   }
 
   render() {
+    const { postList } = this.props;
     return (
       <div>
         <PostEditor onSave={this.onSave.bind(this)}/>
-        <PostList postList={this.state.postList}/>
+        <PostList postList={postList}/>
       </div>
     );
   }
@@ -40,4 +31,10 @@ class AppComponent extends React.Component {
 AppComponent.defaultProps = {
 };
 
-export default AppComponent;
+const mapStateToProps = function(state) {
+  return {
+    postList: state.postList
+  };
+};
+
+export default connect(mapStateToProps)(AppComponent)
